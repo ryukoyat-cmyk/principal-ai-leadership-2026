@@ -22,7 +22,9 @@ export function createCard(card, index) {
 }
 export function emptySection(section) {
   const box=el('div',`empty-state empty-${section}`); box.append(el('span','empty-symbol','✦'));
-  const words=el('div'); words.append(el('h3','',section==='preparation'?'배움의 첫걸음을 준비하고 있어요':'새로운 가능성을 만날 시간'));
-  words.append(el('p','',section==='preparation'?'사전 준비 자료가 등록되면 이곳에서 확인할 수 있습니다.':'연수에 사용할 실습 링크가 이곳에 차곡차곡 모입니다.'));
+  const words=el('div');
+  const copy={preparation:['배움의 첫걸음을 준비하고 있어요','사전 준비 자료가 등록되면 이곳에서 확인할 수 있습니다.'],workshop:['새로운 가능성을 만날 시간','연수에 사용할 실습 링크가 이곳에 차곡차곡 모입니다.'],survey:['배움의 여정을 마무리해 주세요','연수 후 설문 링크가 등록되면 이곳에서 참여할 수 있습니다.']}[section];
+  words.append(el('h3','',copy[0]));
+  words.append(el('p','',copy[1]));
   box.append(words,el('span','empty-note','COMING SOON')); return box;
 }

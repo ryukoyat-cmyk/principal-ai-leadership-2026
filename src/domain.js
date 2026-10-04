@@ -1,4 +1,4 @@
-export const SECTIONS = { preparation: '이것만은 꼭! 준비해주세요', workshop: '강의 자료' };
+export const SECTIONS = { preparation: '이것만은 꼭! 준비해주세요', workshop: '강의 자료', survey: '사후 설문조사' };
 export const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 export function validUrl(value) {
   try { const u = new URL(value); return ['https:', 'http:'].includes(u.protocol) && !u.username && !u.password; } catch { return false; }
