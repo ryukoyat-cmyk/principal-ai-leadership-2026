@@ -1,0 +1,11 @@
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
+const target=path.join(root,'docs');
+if(path.dirname(target)!==root||path.basename(target)!=='docs')throw new Error('Invalid output directory');
+if(!fs.existsSync(path.join(root,'dist','index.html')))throw new Error('Run npm run build first');
+fs.rmSync(target,{recursive:true,force:true});
+fs.cpSync(path.join(root,'dist'),target,{recursive:true});
+fs.writeFileSync(path.join(target,'.nojekyll'),'');
+console.log('GitHub Pages files prepared in docs/');

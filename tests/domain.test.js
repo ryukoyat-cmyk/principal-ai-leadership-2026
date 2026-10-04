@@ -1,0 +1,7 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {validUrl,validateCard,validateImage,sortCards} from '../src/domain.js';
+test('only safe web links without embedded credentials are accepted',()=>{for(const url of ['javascript:alert(1)','data:text/html,test','ftp://a.com','https://name:secret@example.com','not a url'])assert.equal(validUrl(url),false);assert.equal(validUrl('https://example.com/한글?q=1'),true);});
+test('card validation enforces meaningful content and section',()=>{assert.throws(()=>validateCard({title:' ',url:'https://example.com',section:'preparation'}));assert.throws(()=>validateCard({title:'자료',url:'https://example.com',section:'other'}));assert.throws(()=>validateCard({title:'자료',url:'https://example.com',section:'workshop',description:'x'.repeat(501)}));assert.equal(validateCard({title:' 자료 ',url:'https://example.com',section:'workshop'}).title,'자료');});
+test('image format and size are restricted',()=>{assert.throws(()=>validateImage({type:'image/svg+xml',size:10}));assert.throws(()=>validateImage({type:'image/png',size:6*1024*1024}));assert.doesNotThrow(()=>validateImage({type:'image/webp',size:1000}));});
+test('ordering remains deterministic when positions tie',()=>{assert.deepEqual(sortCards([{id:'b',position:0},{id:'a',position:0},{id:'c',position:1}]).map(x=>x.id),['a','b','c']);});

@@ -1,0 +1,19 @@
+{
+  "name": "principal-ai-leadership-2026",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "test": "node --test tests/*.test.js",
+    "prepare-pages": "node scripts/prepare-pages.mjs"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.110.0"
+  },
+  "devDependencies": {
+    "vite": "7.3.6"
+  }
+}
