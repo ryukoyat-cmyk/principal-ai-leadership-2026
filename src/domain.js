@@ -1,4 +1,4 @@
-export const SECTIONS = { preparation: '사전작업', workshop: '본 연수' };
+export const SECTIONS = { preparation: '이것만은 꼭! 준비해주세요', workshop: '강의 자료' };
 export const MAX_IMAGE_BYTES = 5 * 1024 * 1024;
 export function validUrl(value) {
   try { const u = new URL(value); return ['https:', 'http:'].includes(u.protocol) && !u.username && !u.password; } catch { return false; }
@@ -15,4 +15,3 @@ export function validateImage(file) {
   if (file.size > MAX_IMAGE_BYTES) throw new Error('이미지는 5MB 이하로 올려 주세요.');
 }
 export function sortCards(cards) { return [...cards].sort((a,b) => a.position - b.position || a.id.localeCompare(b.id)); }
-export function hostname(url) { try { return new URL(url).hostname.replace(/^www\./, ''); } catch { return ''; } }

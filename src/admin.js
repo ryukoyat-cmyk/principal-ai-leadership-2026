@@ -1,8 +1,8 @@
 import './style.css';
 import { db, BUCKET, fetchCards } from './client.js';
 import { ADMIN_ID } from './config.js';
-import { SECTIONS, validateCard, validateImage, sortCards, hostname } from './domain.js';
-import { el, cardVisual } from './ui.js';
+import { SECTIONS, validateCard, validateImage, sortCards } from './domain.js';
+import { el, cardVisual, cardContents } from './ui.js';
 const $=s=>document.querySelector(s);
 let cards=[], filter='all', editing=null, deleting=null, removeImage=false, selectedFile=null, previewUrl=null, busy=false, toastTimer;
 function toast(message,error=false){const t=$('#toast');t.textContent=message;t.classList.toggle('error',error);t.hidden=false;clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.hidden=true,6000);}
@@ -24,14 +24,15 @@ function render(){
   for(const section of Object.keys(SECTIONS)){
     if(filter!=='all'&&filter!==section)continue;
     const list=sortCards(cards.filter(c=>c.section===section));const group=el('section','admin-section');group.append(el('h2','',`${SECTIONS[section]} · ${list.length}`));
-    if(!list.length)group.append(el('div','admin-empty','아직 등록된 자료가 없습니다. ‘＋ 자료 추가’로 시작해 보세요.'));
-    list.forEach((card,index)=>{const row=el('article',`admin-row${card.is_visible?'':' is-hidden'}`);row.append(cardVisual(card));
-      const content=el('div','admin-row-content');content.append(el('span',`visibility-badge${card.is_visible?'':' hidden-badge'}`,card.is_visible?'공개 중':'숨김'),el('h3','',card.title),el('p','',hostname(card.url)));row.append(content);
+    const grid=el('div','card-grid admin-card-grid');group.append(grid);
+    if(!list.length)grid.append(el('div','admin-empty','아직 등록된 자료가 없습니다. ‘＋ 자료 추가’로 시작해 보세요.'));
+    list.forEach((card,index)=>{const row=el('article',`resource-card admin-card${card.is_visible?'':' is-hidden'}`);row.append(...cardContents(card,index));
+      const controls=el('div','card-controls');controls.append(el('span',`visibility-badge${card.is_visible?'':' hidden-badge'}`,card.is_visible?'공개 중':'숨김'));
       const actions=el('div','row-actions');
       const action=(text,label,fn,disabled=false,cls='')=>{const b=el('button',cls,text);b.type='button';b.setAttribute('aria-label',`${card.title} ${label}`);b.onclick=fn;b.disabled=disabled;actions.append(b);};
       action('↑','위로 이동',()=>moveCard(card,-1),index===0);action('↓','아래로 이동',()=>moveCard(card,1),index===list.length-1);
       action(card.is_visible?'숨기기':'공개하기','공개 상태 변경',()=>mutate(async()=>{const {error}=await db.from('cards').update({is_visible:!card.is_visible}).eq('id',card.id).select('id').single();if(error)throw error;},card.is_visible?'자료를 숨겼습니다.':'자료를 공개했습니다.'));
-      action('수정','수정',()=>openEditor(card));action('삭제','삭제',()=>{deleting=card;$('#delete-title').textContent=card.title;$('#delete-dialog').showModal();},false,'delete-action');row.append(actions);group.append(row);
+      action('수정','수정',()=>openEditor(card));action('삭제','삭제',()=>{deleting=card;$('#delete-title').textContent=card.title;$('#delete-dialog').showModal();},false,'delete-action');controls.append(actions);row.append(controls);grid.append(row);
     });root.append(group);
   }
 }

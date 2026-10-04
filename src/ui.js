@@ -1,4 +1,3 @@
-import { hostname, SECTIONS } from './domain.js';
 import { imageUrl } from './client.js';
 export function el(tag, className, text) { const node = document.createElement(tag); if(className) node.className=className; if(text !== undefined) node.textContent=text; return node; }
 export function cardVisual(card) {
@@ -10,14 +9,16 @@ export function cardVisual(card) {
   if (card.image_path) { const img = el('img'); img.src=imageUrl(card.image_path); img.alt=''; img.loading='lazy'; img.addEventListener('error',()=>img.remove()); visual.append(img); }
   return visual;
 }
+export function cardContents(card, index) {
+  const visual=cardVisual(card); visual.append(el('span','card-index',String(index+1).padStart(2,'0')));
+  const body=el('div','card-body'); body.append(el('h3','',card.title));
+  if(card.description) body.append(el('p','card-description',card.description));
+  return [visual, body];
+}
 export function createCard(card, index) {
   const link=el('a','resource-card'); link.href=card.url; link.target='_blank'; link.rel='noopener noreferrer';
   link.setAttribute('aria-label', `${card.title} (새 탭에서 열기)`);
-  const visual=cardVisual(card); visual.append(el('span','card-index',String(index+1).padStart(2,'0')),el('span','card-launch','↗'));
-  const body=el('div','card-body'); body.append(el('span','card-category',SECTIONS[card.section]),el('h3','',card.title));
-  if(card.description) body.append(el('p','card-description',card.description));
-  body.append(el('div','card-domain',hostname(card.url)));
-  link.append(visual,body); return link;
+  link.append(...cardContents(card,index)); return link;
 }
 export function emptySection(section) {
   const box=el('div',`empty-state empty-${section}`); box.append(el('span','empty-symbol','✦'));
