@@ -58,3 +58,12 @@
 .admin-header-actions .ghost-button { white-space:normal; text-align:center; }
 @media(max-width:760px) { .admin-header-actions { width:100%; justify-content:flex-start; } .filter-group { flex-basis:100%; } }
 @media(max-width:440px) { .admin-header-actions .ghost-button { flex:1 1 auto; } .filter-button { white-space:normal; line-height:1.4; } }
+/* Make admin controls comfortably readable alongside the larger public navigation. */
+.filter-button { padding:10px 13px; font-size:14px; line-height:1.5; }
+.admin-hint { font-size:13px; }
+.visibility-badge { font-size:11px; padding:4px 7px; }
+.row-actions button { min-height:38px; padding:8px 11px; font-size:12px; }
+.admin-section h2 { font-size:21px; }
+.admin-header-actions .ghost-button { font-size:12px; }
+@media(max-width:760px) { .filter-button { font-size:13px; } .admin-hint { font-size:12px; } }
+@media(max-width:440px) { .filter-button { font-size:12px; } .row-actions button { font-size:11px; } }
