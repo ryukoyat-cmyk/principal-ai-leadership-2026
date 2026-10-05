@@ -8,33 +8,49 @@
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <script type="module" crossorigin src="./assets/index-87zjXorH.js"></script>
-  <link rel="modulepreload" crossorigin href="./assets/ui-D_z09Uyn.js">
-  <link rel="stylesheet" crossorigin href="./assets/ui-D-IuyySG.css">
+  <script type="module" crossorigin src="./assets/index-BqsUQKIc.js"></script>
+  <link rel="modulepreload" crossorigin href="./assets/ui-CYfFVR5M.js">
+  <link rel="stylesheet" crossorigin href="./assets/ui-C6yCOk7P.css">
 </head>
 <body>
   <a class="skip-link" href="#preparation">자료 바로가기</a>
   <div class="cosmos" aria-hidden="true"></div>
   <div class="page-shell">
-    <main>
+    <aside class="learning-sidebar" aria-label="연수 메뉴">
+
+      <nav class="section-nav" aria-label="자료 페이지">
+        <button class="section-nav-button active" type="button" data-page="preparation" aria-current="page"><span>01</span><span>이것만은 꼭! 준비해주세요</span></button>
+        <button class="section-nav-button" type="button" data-page="workshop"><span>02</span><span>강의 교안 자료</span></button>
+        <button class="section-nav-button" type="button" data-page="resources"><span>03</span><span>연수 자료실</span></button>
+        <button class="section-nav-button" type="button" data-page="survey"><span>04</span><span>설문조사</span></button>
+      </nav>
+
+    </aside>
+    <div class="content-shell">
+      <main>
       <section class="hero" aria-labelledby="page-title">
         <h1 id="page-title">2026년도 교장 리더십을 위한 생성형 AI 실습<span class="title-star" aria-hidden="true">✦</span></h1>
         <a class="brand hero-brand" href="./" aria-label="연수 홈"><img src="./assets/logo-transparent.png" alt="tobe edu" width="196" height="56"></a>
       </section>
       <div id="load-status" class="notice" role="status" hidden></div>
-      <section class="resource-section" id="preparation" aria-labelledby="preparation-title">
+      <section class="resource-section active-page" id="preparation" aria-labelledby="preparation-title" data-section="preparation">
         <div class="section-heading"><div class="section-title-wrap"><span class="section-number">01</span><div><span class="section-kicker">BEFORE WE BEGIN</span><h2 id="preparation-title">이것만은 꼭! 준비해주세요 <span class="count" id="preparation-count">0</span></h2></div></div><p>연수를 시작하기 전, 가볍게 준비해 주세요.</p></div>
         <div class="card-grid" id="preparation-grid" aria-live="polite"></div>
       </section>
-      <section class="resource-section workshop-section" id="workshop" aria-labelledby="workshop-title">
-        <div class="section-heading"><div class="section-title-wrap"><span class="section-number">02</span><div><span class="section-kicker">LEARN, TRY & INSPIRE</span><h2 id="workshop-title">강의 자료 <span class="count" id="workshop-count">0</span></h2></div></div><p>직접 경험하며, 우리 학교의 가능성을 발견합니다.</p></div>
+      <section class="resource-section workshop-section" id="workshop" aria-labelledby="workshop-title" data-section="workshop" hidden>
+        <div class="section-heading"><div class="section-title-wrap"><span class="section-number">02</span><div><span class="section-kicker">LEARN, TRY & INSPIRE</span><h2 id="workshop-title">강의 교안 자료 <span class="count" id="workshop-count">0</span></h2></div></div><p>연수에서 함께 살펴볼 교안과 강의 자료입니다.</p></div>
         <div class="card-grid" id="workshop-grid" aria-live="polite"></div>
       </section>
-      <section class="resource-section survey-section" id="survey" aria-labelledby="survey-title">
-        <div class="section-heading"><div class="section-title-wrap"><span class="section-number">03</span><div><span class="section-kicker">AFTER THE SESSION</span><h2 id="survey-title">사후 설문조사 <span class="count" id="survey-count">0</span></h2></div></div><p>연수 경험을 들려주세요.</p></div>
+      <section class="resource-section resources-section" id="resources" aria-labelledby="resources-title" data-section="resources" hidden>
+        <div class="section-heading"><div class="section-title-wrap"><span class="section-number">03</span><div><span class="section-kicker">TOOLS & DOWNLOADS</span><h2 id="resources-title">연수 자료실 <span class="count" id="resources-count">0</span></h2></div></div><p>실습 도구와 다운로드 자료를 모았습니다.</p></div>
+        <div class="card-grid" id="resources-grid" aria-live="polite"></div>
+      </section>
+      <section class="resource-section survey-section" id="survey" aria-labelledby="survey-title" data-section="survey" hidden>
+        <div class="section-heading"><div class="section-title-wrap"><span class="section-number">04</span><div><span class="section-kicker">AFTER THE SESSION</span><h2 id="survey-title">설문조사 <span class="count" id="survey-count">0</span></h2></div></div><p>연수 경험을 들려주세요.</p></div>
         <div class="card-grid" id="survey-grid" aria-live="polite"></div>
       </section>
     </main>
     <footer class="footer"><span>함께 배우고, 함께 만들어가는 교육의 내일.</span><span>Copyright © 2026 Jaeyun. All rights reserved.</span></footer>
+    </div>
   </div>
 </body></html>

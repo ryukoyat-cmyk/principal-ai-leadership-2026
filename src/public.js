@@ -21,6 +21,16 @@ async function refresh() {
   } finally { loading=false; }
 }
 refresh();
+const pageButtons=[...document.querySelectorAll('[data-page]')];
+function showPage(name){
+  if(!SECTIONS[name])return;
+  document.querySelectorAll('[data-section]').forEach(section=>{section.hidden=section.dataset.section!==name;section.classList.toggle('active-page',section.dataset.section===name);});
+  pageButtons.forEach(button=>{const active=button.dataset.page===name;button.classList.toggle('active',active);if(active)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current');});
+  document.querySelector('.skip-link').href=`#${name}`;
+  document.querySelector('#page-title').focus({preventScroll:true});
+}
+pageButtons.forEach(button=>button.addEventListener('click',()=>showPage(button.dataset.page)));
+document.querySelector('#page-title').tabIndex=-1;
 window.addEventListener('focus',refresh);
 document.addEventListener('visibilitychange',()=>{if(!document.hidden)refresh();});
 setInterval(()=>{if(!document.hidden)refresh();},30000);

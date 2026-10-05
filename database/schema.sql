@@ -8,7 +8,7 @@ grant select on public.administrators to authenticated;
 create policy "Admin can read own membership" on public.administrators for select to authenticated using (user_id = (select auth.uid()));
 create table public.cards (
  id uuid primary key default gen_random_uuid(),
- section text not null check (section in ('preparation','workshop','survey')),
+ section text not null check (section in ('preparation','workshop','resources','survey')),
  title text not null check (char_length(trim(title)) between 1 and 100),
  url text not null check (char_length(url) <= 2048 and url ~ '^https?://[^[:space:]]+$'),
  description text not null default '' check (char_length(description) <= 500),
@@ -31,7 +31,7 @@ create function public.reorder_cards(section_name text, ordered_ids uuid[]) retu
 language plpgsql security invoker set search_path = '' as $$
 begin
  if not exists(select 1 from public.administrators where user_id=(select auth.uid())) then raise exception 'Unauthorized'; end if;
- if section_name not in ('preparation','workshop','survey') then raise exception 'Invalid section'; end if;
+ if section_name not in ('preparation','workshop','resources','survey') then raise exception 'Invalid section'; end if;
  perform 1 from public.cards where section=section_name for update;
  if cardinality(ordered_ids) <> (select count(*) from public.cards where section=section_name)
  or cardinality(ordered_ids) <> (select count(distinct x) from unnest(ordered_ids) x)
