@@ -44,6 +44,7 @@
 .hero h1 { font-size:clamp(24px,2.55vw,38px); line-height:1.35; }
 .learning-layout { display:grid; grid-template-columns:240px minmax(0,1fr); align-items:start; gap:clamp(24px,3vw,40px); flex:1; min-width:0; }
 .learning-sidebar { position:sticky; top:24px; align-self:start; min-width:0; padding:4px 0 20px; }
+.sidebar-label { display:flex; align-items:center; min-height:50px; margin:0 0 10px; padding:10px 14px; border:1px solid #fff8; border-radius:12px; background:linear-gradient(120deg,#f1dfc9ed,#e4d5c2e8); box-shadow:0 8px 22px #080d241c; color:#3c3b50; font-size:13px; font-weight:800; letter-spacing:2px; }
 .section-nav { display:grid; gap:10px; margin:0; }
 .section-nav-button { display:grid; grid-template-columns:34px minmax(0,1fr); align-items:center; gap:10px; min-height:62px; padding:11px 14px; text-align:left; color:#e0e6f2; background:#ffffff0c; border:1px solid #ffffff12; border-radius:12px; font-size:15px; line-height:1.55; font-weight:600; }
 .section-nav-button>span:first-child { color:#f0ceb1; font-size:11px; letter-spacing:.06em; }
